@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include insur_marketplace *.css
+recursive-include insur_marketplace *.csv
+recursive-include insur_marketplace *.html
+recursive-include insur_marketplace *.ico
+recursive-include insur_marketplace *.js
+recursive-include insur_marketplace *.json
+recursive-include insur_marketplace *.md
+recursive-include insur_marketplace *.png
+recursive-include insur_marketplace *.py
+recursive-include insur_marketplace *.svg
+recursive-include insur_marketplace *.txt
+recursive-exclude insur_marketplace *.pyc

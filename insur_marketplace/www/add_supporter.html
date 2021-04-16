@@ -1,0 +1,222 @@
+<h2 class="text-primary">{{ _("Purchase plan") }}</h2>
+<div class="p-3">
+  <p>{{plan.name1}}</p>
+  <p class="text-primary">KES {{plan.annual_limit}} / yr</p>
+</div>
+<div class="">
+  <div class="d-flex justify-content-center">
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="pills-supporter-tab" data-toggle="pill" href="#pills-supporter" role="tab" aria-controls="pills-supporter" aria-selected="true">Personal detail</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-beneficiary-tab" data-toggle="pill" href="#pills-beneficiary" role="tab" aria-controls="pills-beneficiary" aria-selected="false">Beneficiaries</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-preferences-tab" data-toggle="pill" href="#pills-preferences" role="tab" aria-controls="pills-preferences" aria-selected="false">Preferences</a>
+      </li>
+    </ul>
+  </div>
+  <hr>
+  <!-- supporter form -->
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-supporter" role="tabpanel" aria-labelledby="pills-supporter-tab">
+      <form class="" action="index.html" method="post">
+        <div class="d-flex">
+          <div class="col-lg-6">
+            <label for="supporter_first_name" class="mt-5"><small>first name</small></label>
+            <input id="supporter_first_name" type="text" value="{{supporter.first_name}}" class="form-control">
+
+            <label for="supporter_middle_name" class="mt-5"><small>middle name</small></label>
+            <input id="supporter_middle_name" type="text" value="{{supporter.middle_name}}" class="form-control">
+
+            <label for="supporter_last_name" class="mt-5"><small>last name</small></label>
+            <input id="supporter_last_name" type="text" value="{{supporter.last_name}}" class="form-control">
+
+            <label for="supporter_email" class="mt-5"><small>email</small></label>
+            <input id="supporter_email" type="email" value="{{supporter.email}}" class="form-control">
+
+          </div>
+          <div class="col-lg-6">
+            <label for="supporter_phone_number" class="mt-5"><small>phone number</small></label>
+            <input id="supporter_phone_number" type="text" max="10" value="{{supporter.phone_number}}" class="form-control">
+
+            <label for="supporter_date_of_birth" class="mt-5"><small>date of birth</small></label>
+            <input id="supporter_date_of_birth" type="date" value="{{supporter.date_of_birth}}" class="form-control">
+
+            <label for="supporter_gender" class="mt-5"><small>gender</small></label>
+            <select class="form-control" name=""  id="supporter_gender">
+              <option value='male'>Male</option>
+              <option value='female'>Female</option>
+            </select>
+            <label for="supporter_country" class="mt-5"><small>country</small></label>
+            <select class="form-control" name="" id="supporter_country">
+              {% for country in countries %}
+                <option value="{{country.name}}">{{country.name1}}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      </form>
+      <div class="p-2 mt-5 d-flex justify-content-end">
+        <button type="button" name="button" class="add-supporter-button btn btn-primary">
+          save supporter
+          <span id="save-supporter-spinner" class="d-none spinner-border spinner-border-sm" role="status" aria-hidden="true" ></span>
+        </button>
+      </div>
+    </div>
+    <!-- beneficiaries -->
+    <div class="tab-pane fade" id="pills-beneficiary" role="tabpanel" aria-labelledby="pills-beneficiary-tab">
+      <h3 class="text-primary">Choose beneficiary</h3>
+      {% if beneficiaries | length > 0%}
+        {% for beneficiary in beneficiaries %}
+        <div class="mb-5 p-5 border rounded shadow-sm">
+          <p>{{beneficiary.first_name}} {{beneficiary.last_name}}</p>
+          <p>{{beneficiary.email}}</p>
+        </div>
+        {% endfor %}
+      {% else %}
+      <div class="text-danger p-5 border rounded shadow-sm">
+        You have no beneficiaries added
+      </div>
+      {% endif %}
+
+      <p>
+        <a class="" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+          <h3 class="text-primary">Add beneficiary <i class="arrow down"></i></h3>
+        </a>
+      </p>
+      <div class="collapse" id="collapseExample">
+        <div class="card card-body shadow-sm">
+          <form class="" action="index.html" method="post">
+            <div class="d-flex">
+              <div class="col-lg-6">
+                <label for="beneficiary_first_name" class="mt-5">first name</label>
+                <input id="beneficiary_first_name" type="text" class="form-control">
+
+                <label for="beneficiary_middle_name" class="mt-5">middle name</label>
+                <input id="beneficiary_middle_name" type="text" class="form-control">
+
+                <label for="beneficiary_last_name" class="mt-5">last name</label>
+                <input id="beneficiary_last_name" type="text" class="form-control">
+
+                <label for="beneficiary_email" class="mt-5">email</label>
+                <input id="beneficiary_email" type="email" class="form-control">
+
+              </div>
+              <div class="col-lg-6">
+                <label for="beneficiary_phone_number" class="mt-5">phone number</label>
+                <input id="beneficiary_phone_number" type="text" max="10" class="form-control">
+
+                <label for="beneficiary_date_of_birth" class="mt-5">date of birth</label>
+                <input id="beneficiary_date_of_birth" type="date" class="form-control">
+
+                <label for="beneficiary_gender" class="mt-5">gender</label>
+                <select class="form-control" name="" id="beneficiary_gender">
+                  <option value='male'>Male</option>
+                  <option value='female'>Female</option>
+                </select>
+
+                <label for="beneficiary_country" class="mt-5"><small>country</small></label>
+                <select class="form-control" name="" id="beneficiary_country">
+                  {% for country in countries %}
+                    <option value="{{country.name}}">{{country.name1}}</option>
+                  {% endfor %}
+                </select>
+                <label for="country" class="mt-5">Relation</label>
+                <select class="form-control" name="" id="relation">
+                  {% for relation in relations %}
+                  <option value="{{relation.name}}">{{relation.name1}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+          </form>
+          <div class="p-2 mt-5 d-flex justify-content-end">
+            <button type="button" name="button" class="add-beneficiary-button btn btn-primary">
+              add beneficiary
+              <span id="save-beneficiary-spinner" class="d-none spinner-border spinner-border-sm" role="status" aria-hidden="true" ></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="pills-preferences" role="tabpanel" aria-labelledby="pills-preferences-tab">
+      <form class="" action="index.html" method="post">
+        <div class="d-flex">
+          <div class="col-lg-6">
+            <label for="first_name" class="mt-5">preffered hospital</label>
+            <input id="first_name" type="text" class="form-control">
+          </div>
+          <div class="col-lg-6">
+            <label for="phone_number" class="mt-5">preffered doctor</label>
+            <input id="phone_number" type="text" max="10" class="form-control">
+          </div>
+        </div>
+      </form>
+      <div class="mt-5 p-5 d-flex justify-content-end">
+          <a href="/check_out?plan_name={{plan.name}}" class="btn btn-primary" name="button">proceed to check out</a>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+frappe.ready(function() {
+  // add supporter button
+	$('.add-supporter-button').on('click', function() {
+    document.getElementById('save-supporter-spinner').classList.remove('d-none')
+    setTimeout(()=>{
+      // swith off spinner
+      document.getElementById('save-supporter-spinner').classList.add('d-none')
+    },5000)
+		frappe.call({
+			method: 'insur_marketplace.www.add_supporter.add_supporter',
+      args: {
+        new_supporter: '{{new_supporter}}',
+        supporter_id :'{{ supporter.name }}',
+        first_name: document.getElementById('supporter_first_name').value,
+        last_name: document.getElementById('supporter_last_name').value,
+        middle_name: document.getElementById('supporter_middle_name').value,
+        email: document.getElementById('supporter_email').value,
+        phone_number: document.getElementById('supporter_phone_number').value,
+        date_of_birth: document.getElementById('supporter_date_of_birth').value,
+        gender: document.getElementById('supporter_gender').value,
+        country: document.getElementById('supporter_country').value,
+      },
+			callback: function(response) {
+        document.getElementById('pills-beneficiary-tab').click()
+        document.getElementById('save-supporter-spinner').classList.add('d-none')
+			}
+		});
+	})
+
+  // add beneficiary
+  $('.add-beneficiary-button').on('click', function() {
+    document.getElementById('save-beneficiary-spinner').classList.remove('d-none')
+    setTimeout(()=>{
+      // swith off spinner
+      document.getElementById('save-beneficiary-spinner').classList.add('d-none')
+    },5000)
+    frappe.call({
+      method: 'insur_marketplace.www.add_supporter.add_beneficiary',
+      args: {
+        supporter_id :'{{ supporter.name }}',
+        first_name: document.getElementById('beneficiary_first_name').value,
+        last_name: document.getElementById('beneficiary_last_name').value,
+        middle_name: document.getElementById('beneficiary_middle_name').value,
+        email: document.getElementById('beneficiary_email').value,
+        phone_number: document.getElementById('beneficiary_phone_number').value,
+        date_of_birth: document.getElementById('beneficiary_date_of_birth').value,
+        gender: document.getElementById('beneficiary_gender').value,
+        country: document.getElementById('beneficiary_country').value,
+        relation:document.getElementById('relation').value
+      },
+      callback: function(response) {
+        document.getElementById('pills-preferences-tab').click()
+        document.getElementById('save-beneficiary-spinner').classList.add('d-none')
+      }
+    });
+  })
+
+})
+</script>

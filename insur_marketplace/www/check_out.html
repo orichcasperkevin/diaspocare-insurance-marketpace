@@ -1,0 +1,53 @@
+<div class="flex-wrap">
+  <div class="mb-5">
+    <h3 class="text-primary">Purchase plan</h3>
+  </div>
+  <div class="card">
+    <div class="card-header d-flex justify-content-between">
+      <h3 class="text-primary"></h3>
+      <p class="text-primary">KES {{plan.annual_limit}} / yr</p>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{plan.name1}}</h5>
+      <p class="card-text">{{plan.description}}</p>
+      <hr>
+      <div class="">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+          <label class="form-check-label" for="exampleRadios1">
+            Pay annual fee - ({{plan.annual_limit}})
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+          <label class="form-check-label" for="exampleRadios2">
+            Pay monthly fee - ({{plan.annual_limit}})
+          </label>
+        </div>
+      </div>
+      <hr>
+      <div class="d-flex justify-content-center">
+        <form
+           class="col-lg-6"
+           id="eazzycheckout-payment-form"
+           action=" https://api-test.equitybankgroup.com/v2/checkout/launch" method="POST">
+           <input type="hidden" id="token" value={{payment_token}} name="token">
+           <input type="hidden" id="amount" value=1000 name="amount">
+           <input type="hidden" id="orderReference" name="orderReference" value="4yTr67">
+           <input type="hidden" id="merchantCode" value={{merchant_code}} name="merchantCode">
+           <input type="hidden" id="merchant" name="merchant" value="Designdock KE">
+           <input type="hidden" id="currency" name="currency" value="KES">
+           <input type="hidden" id="custName" name="custName" value="Casper Kevin Orich">
+           <input type="hidden" id="outletCode" name="outletCode" value="{{outlet_code}}">
+           <input type="hidden" id="popupLogo" name="popupLogo" value="http://localhost:8000/files/diaspocare-rbg-logo-removebg-preview.png">
+           <input type="hidden" id="popupTheme" name="popupTheme" value='{"logo":"#f7f7f7","buttons":"#0275d8","tabs":"#0275d8"}'>
+           <input type="hidden" id="ez1_callbackurl" name="ez1_callbackurl" value="http://requestbin.com">
+           <input type="hidden" id="ez2_callbackurl" name="ez2_callbackurl" value="http://requestbin.com">
+           <input type="hidden" id="expiry" name="expiry" value="2025-02-17T19:00:00">
+           <input type="submit" id="submit-cg" role="button" class="btn btn-primary col-md-4"
+              value="Checkout"/>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

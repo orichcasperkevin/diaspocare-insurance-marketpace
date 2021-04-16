@@ -1,0 +1,189 @@
+<!-- about.html -->
+<h2 class="text-primary">{{plan.name1}}</h2>
+<div class="space" style="height: 50px"></div>
+<div class="row">
+    <!-- about the plan -->
+    <div class="shadow-sm border border-light rounded bg-light" style="width:100vw; height:350px">
+      <div class="p-5 d-flex flex-column justify-content-end" >
+        <div class="d-flex justify-content-between">
+            <h4 class="text-primary">About this plan</h4>
+            <h4 class="text-primary">{{plan.annual_limit}} / yr</h4>
+        </div>
+        <div class="col-lg-6 col-sm-12">
+            {{plan.description}}
+        </div>
+        <h4 class="mt-5 text-primary">Limits</h4>
+        <div class="d-flex flex-nowrap mb-3 scrollbar-hidden" style="overflow-x:scroll">
+            {% if plan_limits |length > 0 %}
+              {% for limit in plan_limits%}
+              <div class="ml-3 mt-3 mb-3 border rounded p-2" style="min-width: 250px;">
+                <div class="d-flex">
+                  <p class="">
+                    <img src="/assets/insur_marketplace/icons/icons8-withdrawal-limit-64.png" alt="" style="width:35px; height:auto">
+                    {{limit.limit_name}}
+                  </p>
+                </div>
+                <p class="text-primary">KES {{limit.limit_amount}}</p>
+              </div>
+              {% endfor %}
+            {% else %}
+              <div class="p-2">
+                Not specified
+              </div>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+    <!-- what is covered -->
+    <div class="spacer" style="height: 50px"></div>
+    <div class="mt-5 p-2" style="width:100vw">
+      <h4 class="text-primary">What is covered</h4>
+      <div class="mb-3">
+        <ul class="list-group list-group-flush">
+          {% if covered | length > 0 %}
+            {% for cover in covered %}
+            <li class="list-group-item text-muted">
+              <img src="/assets/insur_marketplace/icons/icons8-tick-box-64.png" alt="" style="width:25px">
+              {{cover.description}}
+            </li>
+            {% endfor %}
+          {% else %}
+            <div class="ml-3 text-muted p-2">
+              <li class="list-group-item rounded">
+                <img src="/assets/insur_marketplace/icons/icons8-cancel-64.png" alt="" style="width:25px">
+                Not specified
+              </li>
+            </div>
+          {% endif %}
+        </ul>
+      </div>
+      <h4 class="text-primary">What is not covered</h4>
+      <div>
+        <ul class="list-group list-group-flush">
+          {% if not_covered | length > 0%}
+            {% for cover in not_covered %}
+            <li class="list-group-item">
+              <img src="/assets/insur_marketplace/icons/icons8-cancel-64.png" alt="" style="width:25px">
+              {{cover.description}}
+            </li>
+            {% endfor %}
+          {% else %}
+            <div class="ml-3 text-muted p-2">
+              <li class="list-group-item rounded">
+                <img src="/assets/insur_marketplace/icons/icons8-cancel-64.png" alt="" style="width:25px">
+                Not specified
+              </li>
+            </div>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+
+    <!-- actions     -->
+    <div class="spacer" style="height: 50px"></div>
+    <div class="mr-5 mt-5 d-flex justify-content-end" style="width:100vw">
+        <button class="btn btn-outline-primary">Talk to someone</button>
+        <a class="btn btn-primary ml-3" href="/add_supporter?plan_name={{plan.name}}">Purchase plan</a>
+    </div>
+    <!-- other plans -->
+    <div class="spacer" style="height: 50px"></div>
+    <div class="p-2 d-flex justify-content-start" style="width:100vw">
+      <h4 class="mt-3 text-primary">Compare plans</h4>
+    </div>
+    <div class="p-2 mt-5" style="width:100vw">
+      <div id="accordion">
+        {% for plan in plans %}
+        <div class="card mb-3">
+          <div class="card-header" id="header{{plan.detail.name}}">
+            <h5 class="mb-0">
+              <button class="btn btn-link" data-toggle="collapse" data-target="#{{plan.detail.name}}" aria-expanded="true" aria-controls="{{plan.detail.name}}">
+              {{plan.detail.name1}}
+              </button>
+            </h5>
+          </div>
+
+          <div id="{{plan.detail.name}}" class="collapse" aria-labelledby="{{plan.detail.name}}" data-parent="#accordion">
+            <div class="card-body">
+              <!-- about the plan -->
+              <div class="">
+                  <div class="d-flex justify-content-between">
+                      <h4 class="text-primary">About this plan</h4>
+                      <h4 class="text-primary">{{plan.detail.annual_limit}} / yr</h4>
+                  </div>
+                  <div class="col-lg-6 col-sm-12">
+                      {{plan.detail.description}}
+                  </div>
+                  <h4 class="mt-5 text-primary">Limits</h4>
+                  <div class="d-flex flex-nowrap mb-3 scrollbar-hidden" style="overflow-x:scroll">
+                      {% if plan.plan_limits |length > 0 %}
+                        {% for limit in plan_limits%}
+                        <div class="ml-3 mt-3 mb-3 border rounded p-2" style="min-width: 250px;">
+                          <div class="d-flex">
+                            <p class="">
+                              <img src="/assets/insur_marketplace/icons/icons8-withdrawal-limit-64.png" alt="" style="width:35px; height:auto">
+                              {{limit.limit_name}}
+                            </p>
+                          </div>
+                          <p class="text-primary">KES {{limit.limit_amount}}</p>
+                        </div>
+                        {% endfor %}
+                      {% else %}
+                        <div class="p-2">
+                          Not specified
+                        </div>
+                      {% endif %}
+                  </div>
+              </div>
+              <hr>
+              <!-- what is covered -->
+              <div class="spacer" style="height: 25px"></div>
+              <div class="mt-5 p-2">
+                <h4 class="text-primary">What is covered</h4>
+                <div class="mb-3">
+                  <ul class="list-group list-group-flush">
+                    {% if plan.covered | length > 0 %}
+                      {% for cover in plan.covered %}
+                      <li class="list-group-item text-muted">
+                        <img src="/assets/insur_marketplace/icons/icons8-tick-box-64.png" alt="" style="width:25px">
+                        {{cover.description}}
+                      </li>
+                      {% endfor %}
+                    {% else %}
+                      <div class="ml-3 text-muted p-2">
+                        <li class="list-group-item rounded">
+                          <img src="/assets/insur_marketplace/icons/icons8-cancel-64.png" alt="" style="width:25px">
+                          Not specified
+                        </li>
+                      </div>
+                    {% endif %}
+                  </ul>
+                </div>
+                <h4 class="text-primary">What is not covered</h4>
+                <div>
+                  <ul class="list-group list-group-flush">
+                    {% if plan.not_covered | length > 0%}
+                      {% for cover in plan.not_covered %}
+                      <li class="list-group-item">
+                        <img src="/assets/insur_marketplace/icons/icons8-cancel-64.png" alt="" style="width:25px">
+                        {{cover.description}}
+                      </li>
+                      {% endfor %}
+                    {% else %}
+                      <div class="ml-3 text-muted p-2">
+                        <li class="list-group-item rounded">
+                          <img src="/assets/insur_marketplace/icons/icons8-cancel-64.png" alt="" style="width:25px">
+                          Not specified
+                        </li>
+                      </div>
+                    {% endif %}
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+</div>

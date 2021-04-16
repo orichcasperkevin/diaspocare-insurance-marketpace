@@ -1,0 +1,82 @@
+<!-- about.html -->
+<h2 class="text-primary">{{ _("Insurance marketplace") }}</h2>
+<div class="row">
+    <div class="border border-light rounded bg-light" style="width:100vw; height:450px">
+      <div class="d-flex flex-column justify-content-end" style="position: absolute; z-index: 1; width:80vw; height:450px">
+        <div class="p-2 text-white col-lg-6">
+          <h2 class="ml-4 text-white rounded">Get the peace of mind of having your family covered by the best healthcare insurance plans</h2>
+          <button class="ml-4 btn btn-primary rounded">Compare plans</button>
+        </div>
+      </div>
+      <img class="image-fit" src="/assets/insur_marketplace/images/258550-2121x1414-Extended_Family_African_American.jpg" alt="">
+    </div>
+    <div class="mt-5 d-flex justify-content-center text-center p-4" style="width:100vw">
+        <h3 class="text-primary">how it works</h3>
+    </div>
+    <div class="mt-3 d-flex justify-content-center" style="width:100vw">
+        <div class="p-5" style="height:100px; width;100px">
+          <div class="d-flex flex-column justify-content-center">
+            <div class="text-center">
+                <img style="width: 50px; height:auto" src="/assets/insur_marketplace/icons/icons8-more-details-64.png" alt=""><br>
+            </div>
+            <div class="text-center">
+              fill out your details
+            </div>
+          </div>
+        </div>
+        <div class="p-5 ml-4 mr-4" style="height:100px; width;100px">
+          <div class="d-flex flex-column justify-content-center">
+            <div class="text-center">
+                <img style="width: 50px; height:auto" src="/assets/insur_marketplace/icons/icons8-compare-64.png" alt=""><br>
+            </div>
+            <div class="text-center">
+              compare suitable plans
+            </div>
+          </div>
+        </div>
+        <div class="p-5" style="height:100px; width;100px">
+          <div class="d-flex flex-column justify-content-center">
+            <div class="text-center">
+                <img style="width: 50px; height:auto" src="/assets/insur_marketplace/icons/icons8-pay-64.png" alt=""><br>
+            </div>
+            <div class="text-center">
+              choose plan and pay
+            </div>
+          </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="d-flex justify-content-center" style="width:100vw">
+      <h3 class="mt-3 text-primary">Best selling plans</h3>
+    </div>
+    <div class="mt-5 d-flex justify-content-center flex-wrap" style="width:100vw">
+      {% for plan in plans %}
+      <div class="mb-3 mr-5 card shadow-sm" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{plan.name1}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Jubilee insurance</h6>
+          <div class="mb-2 truncate-overflow">
+            <p class="card-text">
+              {{plan.description}}
+            </p>
+          </div>
+          <a href="/plan_detail?plan_name={{plan.name}}" class="card-link">see plan detail</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <hr>
+
+    <div class="mt-5 d-flex justify-content-center" style="width:100vw">
+      <div class="d-flex flex-column">
+        <h3>Patner insurance companies</h3>
+        <div class="d-flex justify-content-center">
+          {% for company in insurance_companies%}
+          <div class="" style="height: 50px; width: 75px">
+            <img src="{{company.logo}}" alt="">
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+</div>

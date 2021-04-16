@@ -1,6 +1,6 @@
-## Insur Marketplace
+## Insurance Marketplace
 
-diaspocare insurance marketplace
+DiaspoCare Insurance Marketplace
 
 #### License
 
